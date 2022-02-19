@@ -1,0 +1,33 @@
+on:
+  # Trigger analysis when pushing in master or pull requests, and when creating
+  # a pull request.
+  pull_request:
+    types: [opened, synchronize, reopened]
+name: Sonar Code Coverage
+jobs:
+  sonarcloud:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Set branch name
+        id: set-branch
+        run: echo "branch_name=$(echo ${GITHUB_HEAD_REF})" >> $GITHUB_ENV
+      - name: Get branch
+        run: git fetch origin ${{ env.branch_name }}
+      - name: install n
+        run: sudo npm install -g yarn n
+      - name: install 16.14.0
+        run: sudo n 16.14.0
+      - name: Install dependencies
+        run: yarn install
+      - name: Install Jest globally
+        run: sudo npm install -g jest
+      - name: Run Tests
+        run: yarn test:cov
+      - name: SonarCloud Scan
+        uses: sonarsource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

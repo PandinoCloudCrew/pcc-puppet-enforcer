@@ -1,0 +1,33 @@
+on:
+  push:
+    branches:
+      - develop
+
+name: Deploy PCC Puppet Enforcer DEV
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    environment: development
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ASDASDASDASD
+          aws-secret-access-key: ASDASDQWEQWEQWEASASD12123
+          aws-region: us-west-2
+
+      - name: Slack Notify
+        if: always()
+        uses: rtCamp/action-slack-notify@v2.2.0
+        env:
+          SLACK_USERNAME: PCC-CICD
+          SLACK_ICON_EMOJI: ':bell:'
+          SLACK_COLOR: ${{ job.status }}
+          SLACK_WEBHOOK: https://hooks.slack.com/services/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
+
