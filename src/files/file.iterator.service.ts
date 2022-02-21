@@ -44,11 +44,11 @@ export class FileIteratorService {
     const fileRows = formatParser.readContents(columnFormatHash, fileResource);
 
     for await (const row of fileRows) {
-      row.id = randomUUID();
       fileJob.rows.push(row);
       this.logger.verbose(`Processed row: ${row}`);
     }
     fileJob.status = FileStatus.PROCESSED;
+    fileJob.description = FileJobDescription.FINISHED;
     return fileJob;
   }
 }
