@@ -5,6 +5,7 @@ import { FileRow } from '../model/file.row.entity';
 import * as fs from 'fs';
 import * as readline from 'readline';
 import { FileRowValue } from '../model/file.row.value';
+import { randomUUID } from 'crypto';
 
 export class FileParseCsvService implements IFileParse {
   async *readContents(
@@ -20,17 +21,21 @@ export class FileParseCsvService implements IFileParse {
     for await (const line of rl) {
       fileResource.lines++;
       const fileRow = new FileRow();
+      fileRow.id = randomUUID();
       fileRow.index = fileResource.lines;
       const columns = line.split(fileResource.columnSeparator);
       for (const [index, column] of columns.entries()) {
         const columnFormat = fileFormatHash.getByIndex(Number(index));
-        fileRow.values[columnFormat.name] = new FileRowValue({
-          index: Number(index),
-          source: column,
-          value: columnFormat.apply(column),
-          type: columnFormat.type,
-          name: columnFormat.name,
-        });
+        fileRow.values.set(
+          columnFormat.name,
+          new FileRowValue({
+            index: Number(index),
+            source: column,
+            value: columnFormat.apply(column),
+            type: columnFormat.type,
+            name: columnFormat.name,
+          }),
+        );
       }
       yield fileRow;
     }
