@@ -2,7 +2,7 @@
   "name": "pcc-puppet-enforcer",
   "version": "0.0.1",
   "description": "",
-  "author": "",
+  "author": "yesid.bocanegra@pandino.co",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
@@ -24,6 +24,8 @@
     "@nestjs/common": "^8.0.0",
     "@nestjs/core": "^8.0.0",
     "@nestjs/platform-express": "^8.0.0",
+    "@nestjs/platform-fastify": "^8.3.1",
+    "fastify-compress": "^4.0.1",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0"
