@@ -63,4 +63,4 @@ async function bootstrap() {
   await cachedNestApp.app.listen(3000);
 }
 
-bootstrap();
+if (process.env.RUN_STANDALONE) bootstrap();
