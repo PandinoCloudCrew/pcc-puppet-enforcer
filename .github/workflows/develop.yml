@@ -18,9 +18,30 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: ASDASDASDASD
-          aws-secret-access-key: ASDASDQWEQWEQWEASASD12123
-          aws-region: us-west-2
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Prune node_modules
+        id: injection
+        run: |
+          curl -sf https://gobinaries.com/tj/node-prune | sh
+          npm run install:prod && npm run prune_me
+          mv node_modules/ dist/
+
+      - name: zip
+        uses: montudor/action-zip@v0.1.0
+        with:
+          args: zip -qq -r ./bundle.zip ./dist
+
+      - name: default deploy
+        uses: appleboy/lambda-action@master
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws_region: us-east-1
+          function_name: pcc-puppet-enforcer
+          zip_file: bundle.zip
 
       - name: Slack Notify
         if: always()
@@ -29,5 +50,5 @@ jobs:
           SLACK_USERNAME: PCC-CICD
           SLACK_ICON_EMOJI: ':bell:'
           SLACK_COLOR: ${{ job.status }}
-          SLACK_WEBHOOK: https://hooks.slack.com/services/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
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
 
