@@ -28,7 +28,7 @@ jobs:
         run: sudo npm install -g @nestjs/cli
 
       - name: Build Project
-        run: sudo npm run build
+        run: sudo npm run build && tsc
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
