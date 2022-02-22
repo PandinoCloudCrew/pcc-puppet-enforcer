@@ -9,7 +9,7 @@ export class FileFormatHash {
     this.fileFormatMap = fileResource.columnFormat;
     for (const column of this.fileFormatMap) {
       this.indexOrderMap[column.index] = column;
-      fileResource.columnName.add(column.name);
+      fileResource.columnName[column.name] = column.index;
     }
   }
 
