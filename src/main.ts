@@ -54,7 +54,7 @@ async function bootstrap() {
   await cachedNestApp.app.register(compression, {
     encodings: ['gzip', 'deflate'],
   });
-  await cachedNestApp.app.useGlobalPipes(
+  cachedNestApp.app.useGlobalPipes(
     new ValidationPipe({
       transform: true,
     }),
