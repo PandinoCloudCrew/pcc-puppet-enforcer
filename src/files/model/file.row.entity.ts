@@ -6,5 +6,6 @@ export class FileRow {
   id: string;
   @IsNumber()
   index: number;
+  columns = 0;
   values: Record<string, FileRowValue> = {};
 }

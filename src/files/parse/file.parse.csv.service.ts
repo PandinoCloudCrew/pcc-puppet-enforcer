@@ -26,6 +26,7 @@ export class FileParseCsvService implements IFileParse {
       const columns = line.split(fileResource.columnSeparator);
       for (const [index, column] of columns.entries()) {
         const columnFormat = fileFormatHash.getByIndex(Number(index));
+        fileRow.columns++;
         fileRow.values[columnFormat.name] = new FileRowValue({
           index: Number(index),
           source: column,
