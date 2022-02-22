@@ -8,13 +8,14 @@ import compression from 'fastify-compress';
 import { ValidationPipe } from '@nestjs/common';
 import 'reflect-metadata';
 import { FastifyServerOptions, FastifyInstance, fastify } from 'fastify';
-import * as awsLambdaFastify from 'aws-lambda-fastify';
 import {
   Context,
   APIGatewayProxyEvent,
   APIGatewayProxyResult,
 } from 'aws-lambda';
 import { Logger } from '@nestjs/common';
+
+import awsLambdaFastify from 'aws-lambda-fastify';
 
 interface NestApp {
   app: NestFastifyApplication;
@@ -43,7 +44,7 @@ export const handler = async (
   if (!cachedNestApp) {
     cachedNestApp = await bootstrapServer();
   }
-  const proxy = awsLambdaFastify.default(cachedNestApp.instance);
+  const proxy = awsLambdaFastify(cachedNestApp.instance);
   return proxy(event, context);
 };
 
@@ -62,4 +63,4 @@ async function bootstrap() {
   await cachedNestApp.app.listen(3000);
 }
 
-bootstrap();
+if (process.env.RUN_STANDALONE) bootstrap();
