@@ -19,10 +19,10 @@ describe('File Parse CSV', () => {
       for await (const fileRow of fileRows) {
         expect(fileRow.id).toBeDefined();
         expect(fileRow.index).toBe(fileResource.lines);
-        expect(fileRow.values.size).toBe(fileResource.columnFormat.length);
+        expect(fileRow.columns).toBe(fileResource.columnFormat.length);
       }
       expect(fileResource.lines).toBeGreaterThan(0);
-      expect(fileResource.columnName.size).toBeGreaterThan(0);
+      expect(fileResource.columnName).toBeTruthy();
     });
   });
 });

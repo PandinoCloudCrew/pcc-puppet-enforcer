@@ -45,7 +45,7 @@ export class FileIteratorService {
 
     for await (const row of fileRows) {
       fileJob.rows.push(row);
-      this.logger.verbose(`Processed row: ${row}`);
+      this.logger.verbose(`Processed row: ${JSON.stringify(row)}`);
     }
     fileJob.status = FileStatus.PROCESSED;
     fileJob.description = FileJobDescription.FINISHED;
