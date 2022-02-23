@@ -15,7 +15,10 @@ import {
 } from 'aws-lambda';
 import { Logger } from '@nestjs/common';
 
-import awsLambdaFastify from 'aws-lambda-fastify';
+import awsLambdaFastify, {
+  LambdaResponse,
+  PromiseHandler,
+} from 'aws-lambda-fastify';
 
 interface NestApp {
   app: NestFastifyApplication;
@@ -23,6 +26,7 @@ interface NestApp {
 }
 
 let cachedNestApp: NestApp;
+let cachedProxy: PromiseHandler<unknown, LambdaResponse>;
 
 async function bootstrapServer(): Promise<NestApp> {
   const serverOptions: FastifyServerOptions = { logger: true };
@@ -44,11 +48,13 @@ export const handler = async (
   if (!cachedNestApp) {
     cachedNestApp = await bootstrapServer();
   }
-  const proxy = awsLambdaFastify(cachedNestApp.instance, {
-    decorateRequest: true,
-  });
-  await cachedNestApp.instance.ready();
-  return proxy(event, context);
+  if (!cachedProxy) {
+    cachedProxy = awsLambdaFastify(cachedNestApp.instance, {
+      decorateRequest: true,
+    });
+    await cachedNestApp.instance.ready();
+  }
+  return cachedProxy(event, context);
 };
 
 async function bootstrap() {
