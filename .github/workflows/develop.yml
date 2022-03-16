@@ -25,7 +25,7 @@ jobs:
         run: yarn install
 
       - name: Install NestJS globally
-        run: yarn global add @nestjs/cli
+        run: sudo npm install -g @nestjs/cli
 
       - name: Build Project
         run: yarn build && tsc
