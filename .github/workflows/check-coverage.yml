@@ -19,9 +19,9 @@ jobs:
       - name: install n
         run: sudo npm install -g yarn n
       - name: install 16.14.1
-        run: sudo n 16.14.1 && yarn set version stable
+        run: sudo n 16.14.1 && yarn set version classic
       - name: Install dependencies
-        run: yarn install
+        run: yarn install --production=true
       - name: Install Jest globally
         run: sudo npm install -g jest
       - name: Run Tests
