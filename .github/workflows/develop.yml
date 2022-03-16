@@ -43,6 +43,7 @@ jobs:
           curl -sf https://gobinaries.com/tj/node-prune | sh
           npm run install:prod && npm run prune_me
           mv node_modules/ dist/
+          mv package.json dist/
           zip -qq -r ./bundle.zip ./dist
 
       - name: default deploy
