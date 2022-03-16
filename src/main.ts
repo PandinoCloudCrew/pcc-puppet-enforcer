@@ -57,7 +57,7 @@ export const handler = async (
   return cachedProxy(event, context);
 };
 
-async function bootstrap() {
+async function bootstrap(): Promise<void> {
   if (!cachedNestApp) {
     cachedNestApp = await bootstrapServer();
   }
