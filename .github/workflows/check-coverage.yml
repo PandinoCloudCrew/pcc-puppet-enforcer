@@ -18,8 +18,8 @@ jobs:
         run: git fetch origin ${{ env.branch_name }}
       - name: install n
         run: sudo npm install -g yarn n
-      - name: install 16.14.0
-        run: sudo n 16.14.0
+      - name: install 16.14.1
+        run: sudo n 16.14.1 && yarn set version stable
       - name: Install dependencies
         run: yarn install
       - name: Install Jest globally
