@@ -17,15 +17,15 @@ jobs:
       - name: Get branch
         run: git fetch origin ${{ env.branch_name }}
       - name: install n
-        run: sudo npm install -g n
+        run: sudo npm install -g yarn n
       - name: install 16.14.1
         run: sudo n 16.14.1
       - name: Install dependencies
-        run: npm install
+        run: yarn install
       - name: Install Jest globally
         run: sudo npm install -g jest
       - name: Run Tests
-        run: npm run test:cov
+        run: yarn test:cov
       - name: SonarCloud Scan
         uses: sonarsource/sonarcloud-github-action@master
         env:
