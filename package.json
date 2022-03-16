@@ -4,6 +4,12 @@
   "description": "",
   "author": "yesid.bocanegra@pandino.co",
   "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "exports": "./index.js",
+  "packageManager": "yarn@3.2.0",
   "license": "UNLICENSED",
   "scripts": {
     "prebuild": "rimraf dist",
@@ -91,6 +97,5 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
-  },
-  "packageManager": "yarn@3.2.0"
+  }
 }

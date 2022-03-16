@@ -1,10 +1,10 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { FileIteratorController } from './file.iterator.controller';
-import { FileIteratorService } from './file.iterator.service';
-import { fileResource } from '../__mocks__/file.resource.mock';
-import { FilesModule } from './files.module';
-import { FileLocatorProvider } from './locate/file.locator.provider';
-import { FileParseProvider } from './parse/file.parse.provider';
+import { fileResource } from '../__mocks__/file.resource.mock.js';
+import { FileIteratorController } from './file.iterator.controller.js';
+import { FileIteratorService } from './file.iterator.service.js';
+import { FilesModule } from './files.module.js';
+import { FileLocatorProvider } from './locate/file.locator.provider.js';
+import { FileParseProvider } from './parse/file.parse.provider.js';
 
 describe('AppController', () => {
   let fileIteratorController: FileIteratorController;

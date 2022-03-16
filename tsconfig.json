@@ -1,14 +1,15 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "es2022",
+    "target": "ES2021",
+    "moduleResolution": "Node",
     "declaration": true,
     "removeComments": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "target": "ES2019",
-    "lib": ["ES2019"],
+    "lib": ["ES2021"],
     "sourceMap": true,
     "outDir": "./dist",
     "rootDir": "./src",

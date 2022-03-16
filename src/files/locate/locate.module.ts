@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { FileLocatorProvider } from './file.locator.provider';
+import { FileLocatorProvider } from './file.locator.provider.js';
 
 @Module({
   exports: [FileLocatorProvider],

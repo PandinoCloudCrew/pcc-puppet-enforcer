@@ -1,7 +1,7 @@
-import { IFileLocator } from './file.locator.interface';
 import { Injectable } from '@nestjs/common';
-import { FileStorage } from '../model/file.storage.enum';
-import { FileLocatorLocalService } from './file.locator.local.service';
+import { FileStorage } from '../model/file.storage.enum.js';
+import { IFileLocator } from './file.locator.interface.js';
+import { FileLocatorLocalService } from './file.locator.local.service.js';
 
 @Injectable()
 export class FileLocatorProvider {

@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { FileParseProvider } from './file.parse.provider';
+import { FileParseProvider } from './file.parse.provider.js';
 
 @Module({
   exports: [FileParseProvider],

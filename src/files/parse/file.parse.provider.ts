@@ -1,8 +1,8 @@
-import { FileType } from '../model/file.type.enum';
 import { Injectable } from '@nestjs/common';
-import { IFileParse } from './file.parse.interface';
-import { FileParseCsvService } from './file.parse.csv.service';
-import { FileParseNoopService } from './file.parse.noop.service';
+import { FileType } from '../model/file.type.enum.js';
+import { FileParseCsvService } from './file.parse.csv.service.js';
+import { IFileParse } from './file.parse.interface.js';
+import { FileParseNoopService } from './file.parse.noop.service.js';
 
 @Injectable()
 export class FileParseProvider {

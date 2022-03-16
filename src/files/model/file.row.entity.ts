@@ -1,5 +1,5 @@
-import { FileRowValue } from './file.row.value';
 import { IsNumber, IsString } from 'class-validator';
+import { FileRowValue } from './file.row.value.js';
 
 export class FileRow {
   @IsString()

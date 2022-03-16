@@ -1,24 +1,23 @@
+import { Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import {
   FastifyAdapter,
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
-import { AppModule } from './app.module';
-import compression from 'fastify-compress';
-import { ValidationPipe } from '@nestjs/common';
-import 'reflect-metadata';
-import { FastifyServerOptions, FastifyInstance, fastify } from 'fastify';
 import {
-  Context,
   APIGatewayProxyEvent,
   APIGatewayProxyResult,
+  Context,
 } from 'aws-lambda';
-import { Logger } from '@nestjs/common';
 
 import awsLambdaFastify, {
   LambdaResponse,
   PromiseHandler,
 } from 'aws-lambda-fastify';
+import { fastify, FastifyInstance, FastifyServerOptions } from 'fastify';
+import compression from 'fastify-compress';
+import 'reflect-metadata';
+import { AppModule } from './app.module.js';
 
 interface NestApp {
   app: NestFastifyApplication;

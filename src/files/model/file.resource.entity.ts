@@ -1,7 +1,3 @@
-import { FileType } from './file.type.enum';
-import { FileStatus } from './file.status.enum';
-import { FileStorage } from './file.storage.enum';
-import { FileFormatMap } from '../format/file.format.map';
 import {
   IsArray,
   IsDefined,
@@ -9,6 +5,10 @@ import {
   IsNumber,
   IsString,
 } from '@nestjs/class-validator';
+import { FileFormatMap } from '../format/file.format.map.js';
+import { FileStatus } from './file.status.enum.js';
+import { FileStorage } from './file.storage.enum.js';
+import { FileType } from './file.type.enum.js';
 
 export class FileResource {
   @IsString()

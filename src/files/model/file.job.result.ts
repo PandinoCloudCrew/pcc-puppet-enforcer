@@ -1,7 +1,7 @@
-import { FileResource } from './file.resource.entity';
-import { FileStatus } from './file.status.enum';
-import { FileJobDescription } from './file.job.description.enum';
-import { FileRow } from './file.row.entity';
+import { FileJobDescription } from './file.job.description.enum.js';
+import { FileResource } from './file.resource.entity.js';
+import { FileRow } from './file.row.entity.js';
+import { FileStatus } from './file.status.enum.js';
 
 export class FileJobResult {
   id: string;

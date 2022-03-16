@@ -1,4 +1,4 @@
-import { FileRowType } from './file.row.type.enum';
+import { FileRowType } from './file.row.type.enum.js';
 
 export class FileFormatMap {
   index: number;

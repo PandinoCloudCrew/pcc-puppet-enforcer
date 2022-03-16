@@ -1,4 +1,4 @@
-import { FileRowType } from '../format/file.row.type.enum';
+import { FileRowType } from '../format/file.row.type.enum.js';
 
 export class FileRowValue {
   index: number;

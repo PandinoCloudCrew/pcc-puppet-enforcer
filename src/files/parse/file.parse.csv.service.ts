@@ -1,11 +1,11 @@
-import { IFileParse } from './file.parse.interface';
-import { FileFormatHash } from '../format/file.format.hash';
-import { FileResource } from '../model/file.resource.entity';
-import { FileRow } from '../model/file.row.entity';
+import { randomUUID } from 'crypto';
 import * as fs from 'fs';
 import * as readline from 'readline';
-import { FileRowValue } from '../model/file.row.value';
-import { randomUUID } from 'crypto';
+import { FileFormatHash } from '../format/file.format.hash.js';
+import { FileResource } from '../model/file.resource.entity.js';
+import { FileRow } from '../model/file.row.entity.js';
+import { FileRowValue } from '../model/file.row.value.js';
+import { IFileParse } from './file.parse.interface.js';
 
 export class FileParseCsvService implements IFileParse {
   async *readContents(

@@ -1,5 +1,5 @@
-import { FileLocatorLocalService } from './file.locator.local.service';
-import { fileResource } from '../../__mocks__/file.resource.mock';
+import { fileResource } from '../../__mocks__/file.resource.mock.js';
+import { FileLocatorLocalService } from './file.locator.local.service.js';
 
 describe('File Parse CSV', () => {
   let fileLocatorLocalService: FileLocatorLocalService;

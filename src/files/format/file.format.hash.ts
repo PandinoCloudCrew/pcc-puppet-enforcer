@@ -1,5 +1,5 @@
-import { FileFormatMap } from './file.format.map';
-import { FileResource } from '../model/file.resource.entity';
+import { FileResource } from '../model/file.resource.entity.js';
+import { FileFormatMap } from './file.format.map.js';
 
 export class FileFormatHash {
   fileFormatMap: Array<FileFormatMap>;

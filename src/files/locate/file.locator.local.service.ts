@@ -1,9 +1,9 @@
-import { IFileLocator } from './file.locator.interface';
-import { FileResource } from '../model/file.resource.entity';
-import { promises as fs } from 'fs';
-import { FileType } from '../model/file.type.enum';
 import { Logger } from '@nestjs/common';
+import { promises as fs } from 'fs';
 import * as path from 'path';
+import { FileResource } from '../model/file.resource.entity.js';
+import { FileType } from '../model/file.type.enum.js';
+import { IFileLocator } from './file.locator.interface.js';
 
 export class FileLocatorLocalService implements IFileLocator {
   private readonly logger = new Logger(FileLocatorLocalService.name);

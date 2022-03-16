@@ -1,8 +1,8 @@
-import { IFileParse } from './file.parse.interface';
-import { FileFormatHash } from '../format/file.format.hash';
-import { FileResource } from '../model/file.resource.entity';
-import { FileRow } from '../model/file.row.entity';
 import { Logger } from '@nestjs/common';
+import { FileFormatHash } from '../format/file.format.hash.js';
+import { FileResource } from '../model/file.resource.entity.js';
+import { FileRow } from '../model/file.row.entity.js';
+import { IFileParse } from './file.parse.interface.js';
 
 export class FileParseNoopService implements IFileParse {
   private readonly logger = new Logger(FileParseNoopService.name);

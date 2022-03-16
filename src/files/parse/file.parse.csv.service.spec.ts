@@ -1,6 +1,6 @@
-import { FileParseCsvService } from './file.parse.csv.service';
-import { FileFormatHash } from '../format/file.format.hash';
-import { fileResource } from '../../__mocks__/file.resource.mock';
+import { fileResource } from '../../__mocks__/file.resource.mock.js';
+import { FileFormatHash } from '../format/file.format.hash.js';
+import { FileParseCsvService } from './file.parse.csv.service.js';
 
 describe('File Parse CSV', () => {
   let fileParseCsvService: FileParseCsvService;

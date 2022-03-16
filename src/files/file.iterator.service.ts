@@ -1,12 +1,12 @@
-import { FileLocatorProvider } from './locate/file.locator.provider';
 import { Injectable, Logger } from '@nestjs/common';
-import { FileResource } from './model/file.resource.entity';
-import { FileJobResult } from './model/file.job.result';
-import { FileStatus } from './model/file.status.enum';
-import { FileJobDescription } from './model/file.job.description.enum';
 import { randomUUID } from 'crypto';
-import { FileParseProvider } from './parse/file.parse.provider';
-import { FileFormatHash } from './format/file.format.hash';
+import { FileFormatHash } from './format/file.format.hash.js';
+import { FileLocatorProvider } from './locate/file.locator.provider.js';
+import { FileJobDescription } from './model/file.job.description.enum.js';
+import { FileJobResult } from './model/file.job.result.js';
+import { FileResource } from './model/file.resource.entity.js';
+import { FileStatus } from './model/file.status.enum.js';
+import { FileParseProvider } from './parse/file.parse.provider.js';
 
 @Injectable()
 export class FileIteratorService {

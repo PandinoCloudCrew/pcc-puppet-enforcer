@@ -1,7 +1,7 @@
 import { Body, Controller, Logger, Post } from '@nestjs/common';
-import { FileIteratorService } from './file.iterator.service';
-import { FileResource } from './model/file.resource.entity';
-import { FileJobResult } from './model/file.job.result';
+import { FileIteratorService } from './file.iterator.service.js';
+import { FileJobResult } from './model/file.job.result.js';
+import { FileResource } from './model/file.resource.entity.js';
 
 @Controller('/file')
 export class FileIteratorController {
