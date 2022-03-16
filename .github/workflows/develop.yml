@@ -16,19 +16,19 @@ jobs:
         uses: actions/checkout@v2
 
       - name: install n
-        run: sudo npm install -g yarn n
+        run: sudo npm install -g n
 
       - name: install 16.14.1
-        run: sudo n 16.14.1 && yarn set version classic
+        run: sudo n 16.14.1
 
       - name: Install dependencies
-        run: yarn install --production=true
+        run: npm install
 
       - name: Install NestJS globally
-        run: sudo npm install -g @nestjs/cli
+        run: npm install -g @nestjs/cli
 
       - name: Build Project
-        run: sudo npm run build && tsc
+        run: npm run build && tsc && npm install --production
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
