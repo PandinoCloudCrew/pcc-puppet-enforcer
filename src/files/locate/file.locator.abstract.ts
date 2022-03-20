@@ -1,12 +1,16 @@
-import { Logger } from '@nestjs/common';
 import { promises as fs } from 'fs';
+import { PinoLogger } from 'nestjs-pino';
 import path from 'path';
 import { FileResource } from '../model/file.resource.entity.js';
 import { FileType } from '../model/file.type.enum.js';
 import { IFileLocator } from './file.locator.interface.js';
 
 export abstract class FileLocatorBase implements IFileLocator {
-  private readonly logger = new Logger(FileLocatorBase.name);
+  logger: PinoLogger;
+  protected constructor(logger: PinoLogger) {
+    this.logger = logger;
+    this.logger.setContext(FileLocatorBase.name);
+  }
 
   abstract downloadBytes(fileResource: FileResource): Promise<string>;
 

@@ -1,4 +1,4 @@
-import { Logger, ValidationPipe } from '@nestjs/common';
+import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import {
   FastifyAdapter,
@@ -16,8 +16,10 @@ import awsLambdaFastify, {
 } from 'aws-lambda-fastify';
 import { fastify, FastifyInstance, FastifyServerOptions } from 'fastify';
 import compression from 'fastify-compress';
+import { Logger } from 'nestjs-pino';
 import 'reflect-metadata';
 import { AppModule } from './app.module.js';
+import { BaseErrorFilter } from './filters/base.exception.filter.js';
 
 interface NestApp {
   app: NestFastifyApplication;
@@ -33,9 +35,11 @@ async function bootstrapServer(): Promise<NestApp> {
   const app = await NestFactory.create<NestFastifyApplication>(
     AppModule,
     new FastifyAdapter(instance),
-    { logger: !process.env.AWS_EXECUTION_ENV ? new Logger() : console },
+    { bufferLogs: true },
   );
+  app.useLogger(app.get(Logger));
   app.setGlobalPrefix(process.env.API_PREFIX);
+  app.useGlobalFilters(new BaseErrorFilter());
   await app.init();
   return { app, instance };
 }

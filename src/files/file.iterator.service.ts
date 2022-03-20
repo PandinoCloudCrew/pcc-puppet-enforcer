@@ -1,5 +1,6 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { randomUUID } from 'crypto';
+import { InjectPinoLogger, PinoLogger } from 'nestjs-pino';
 import { FileFormatHash } from './format/file.format.hash.js';
 import { FileLocatorProvider } from './locate/file.locator.provider.js';
 import { FileJobDescription } from './model/file.job.description.enum.js';
@@ -10,9 +11,9 @@ import { FileParseProvider } from './parse/file.parse.provider.js';
 
 @Injectable()
 export class FileIteratorService {
-  private readonly logger = new Logger(FileIteratorService.name);
-
   constructor(
+    @InjectPinoLogger(FileIteratorService.name)
+    private readonly logger: PinoLogger,
     private fileLocatorProvider: FileLocatorProvider,
     private fileParseProvider: FileParseProvider,
   ) {}
@@ -45,7 +46,7 @@ export class FileIteratorService {
 
     for await (const row of fileRows) {
       fileJob.rows.push(row);
-      this.logger.verbose(`Processed row: ${JSON.stringify(row)}`);
+      this.logger.trace(`Processed row: ${JSON.stringify(row)}`);
     }
     fileJob.status = FileStatus.PROCESSED;
     fileJob.description = FileJobDescription.FINISHED;
