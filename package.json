@@ -97,6 +97,7 @@
       "../node_modules/",
       "../test/",
       "..(module).(ts|js)",
+      "..(mock).(ts|js)",
       "src/main.ts"
     ],
     "coverageDirectory": "../coverage",

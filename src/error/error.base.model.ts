@@ -1,17 +1,17 @@
 import { HttpStatus } from '@nestjs/common';
 
-export class BaseError {
+export class BaseError extends Error {
   id: string;
   code: number;
   source: string;
   message: string;
   httpStatus: number;
-  stack?: unknown;
 
   constructor(error: unknown) {
+    super();
     this.message = BaseError.toErrorWithMessage(error).message;
     this.httpStatus = HttpStatus.BAD_REQUEST;
-    this.stack = (error as any)?.stack;
+    this.stack = (error as Error)?.stack;
   }
 
   private static isErrorWithMessage(error: unknown): error is ErrorWithMessage {

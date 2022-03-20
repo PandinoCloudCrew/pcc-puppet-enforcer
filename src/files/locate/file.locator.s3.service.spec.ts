@@ -1,6 +1,7 @@
 import { GetObjectCommand, S3Client } from '@aws-sdk/client-s3';
 import fs from 'fs';
 import { fileResource } from '../../__mocks__/file.resource.mock.js';
+import { FileNotFoundS3Error } from '../../error/file.not.found.s3.error.js';
 import { FileLocatorS3Service } from './file.locator.s3.service.js';
 import { s3Client } from './s3/s3.client.js';
 import { mockClient } from 'aws-sdk-client-mock';
@@ -21,6 +22,17 @@ describe('Fetch S3 CSV File', () => {
       const uriProperties = fileLocatorLocalService.readS3Uri(s3Uri);
       expect(uriProperties.Bucket).toEqual(Bucket);
       expect(uriProperties.Key).toEqual(Key);
+    });
+
+    it('should throw FileNotFoundS3Error if file is not found', async () => {
+      s3mock.on(GetObjectCommand).rejects({
+        name: 'NoSuchKey',
+      });
+      fileResource.remotePath = s3Uri;
+      fileResource.name = 'test-users.csv';
+      await expect(
+        async () => await fileLocatorLocalService.downloadBytes(fileResource),
+      ).rejects.toThrow(FileNotFoundS3Error);
     });
 
     it('should validate object from s3 storage', async () => {
