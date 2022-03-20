@@ -31,6 +31,7 @@
     "prune_me": "npm prune --production && node-prune && rimraf node_modules/rxjs/src && rimraf node_modules/rxjs/bundles && rimraf node_modules/rxjs/_esm*"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.54.1",
     "@nestjs/class-transformer": "0.4.0",
     "@nestjs/class-validator": "0.13.4",
     "@nestjs/common": "8.4.1",
