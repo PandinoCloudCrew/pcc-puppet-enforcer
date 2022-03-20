@@ -1,4 +1,6 @@
 import { randomUUID } from 'crypto';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import { FileFormatMap } from '../files/format/file.format.map.js';
 import { FileRowType } from '../files/format/file.row.type.enum.js';
 import { FileResource } from '../files/model/file.resource.entity.js';
@@ -6,7 +8,10 @@ import { FileStatus } from '../files/model/file.status.enum.js';
 import { FileStorage } from '../files/model/file.storage.enum.js';
 import { FileType } from '../files/model/file.type.enum.js';
 
-const fileResource = new FileResource({
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+export const fileResource = new FileResource({
   id: randomUUID(),
   status: FileStatus.CREATED,
   columnSeparator: ',',
@@ -32,5 +37,3 @@ const fileResource = new FileResource({
     }),
   ],
 });
-
-export { fileResource };

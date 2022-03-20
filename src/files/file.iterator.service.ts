@@ -29,7 +29,7 @@ export class FileIteratorService {
     const fileLocator = this.fileLocatorProvider.getLocator(
       fileResource.storageType,
     );
-    const downloaded = await fileLocator.downloadBytes(fileResource);
+    const downloaded = await fileLocator.fetchRemoteFile(fileResource);
     if (!downloaded) {
       fileJob.status = FileStatus.FAILED;
       fileJob.description = FileJobDescription.FILE_NOT_FOUND;

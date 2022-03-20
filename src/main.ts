@@ -4,9 +4,6 @@ import {
   FastifyAdapter,
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
-import { RewriteFrames } from '@sentry/integrations';
-import * as Sentry from '@sentry/node';
-import * as Tracing from '@sentry/tracing';
 import {
   APIGatewayProxyEvent,
   APIGatewayProxyResult,
@@ -26,22 +23,6 @@ interface NestApp {
   app: NestFastifyApplication;
   instance: FastifyInstance;
 }
-
-Sentry.init({
-  dsn: 'https://40b69a92eb9141e3b52277301b5bd031@o1149738.ingest.sentry.io/6222146',
-  integrations: [
-    new RewriteFrames({
-      root: global.__dirname,
-    }),
-    new Sentry.Integrations.Console(),
-    new Sentry.Integrations.Http({ tracing: true }),
-    new Tracing.BrowserTracing(),
-  ],
-  tracesSampleRate: 1.0,
-  debug: true,
-  environment: process.env.NODE_ENV,
-  release: `${process.env.npm_package_name}@${process.env.npm_package_version}`,
-});
 
 let cachedNestApp: NestApp;
 let cachedProxy: PromiseHandler<unknown, LambdaResponse>;

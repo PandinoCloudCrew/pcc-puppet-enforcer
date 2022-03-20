@@ -18,10 +18,13 @@
     "baseUrl": "./",
     "incremental": true
   },
+  "include": [
+    "**/*.spec.ts",
+    "**/*.ts"
+  ],
   "exclude": [
     "node_modules",
     "test",
-    "dist",
-    "**/*spec.ts"
+    "dist"
   ]
 }

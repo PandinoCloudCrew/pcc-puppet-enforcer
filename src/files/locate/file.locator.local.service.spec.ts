@@ -1,7 +1,7 @@
 import { fileResource } from '../../__mocks__/file.resource.mock.js';
 import { FileLocatorLocalService } from './file.locator.local.service.js';
 
-describe('File Parse CSV', () => {
+describe('Fetch Local CSV File', () => {
   let fileLocatorLocalService: FileLocatorLocalService;
 
   beforeEach(async () => {
@@ -14,6 +14,7 @@ describe('File Parse CSV', () => {
         fileResource,
       );
       expect(downloaded).toBeTruthy();
+      expect(downloaded).toEqual(fileResource.remotePath);
     });
   });
 });
