@@ -1,4 +1,4 @@
-import { S3 } from '@aws-sdk/client-s3';
+import { GetObjectCommand, S3Client } from '@aws-sdk/client-s3';
 import { Logger } from '@nestjs/common';
 import fs from 'fs';
 import path from 'path';
@@ -9,14 +9,14 @@ import { FileLocatorBase } from './file.locator.abstract.js';
 
 export class FileLocatorS3Service extends FileLocatorBase {
   private readonly log = new Logger(FileLocatorS3Service.name);
-  s3: S3;
+  s3: S3Client;
 
-  constructor() {
+  constructor(s3: S3Client) {
     super();
-    this.s3 = new S3({});
+    this.s3 = s3;
   }
 
-  private static readS3Uri(remotePath: string): {
+  readS3Uri(remotePath: string): {
     Bucket: string;
     Key: string;
   } {
@@ -28,10 +28,10 @@ export class FileLocatorS3Service extends FileLocatorBase {
 
   async downloadBytes(fileResource: FileResource): Promise<string> {
     try {
-      const { Bucket, Key } = FileLocatorS3Service.readS3Uri(
-        fileResource.remotePath,
+      const { Bucket, Key } = this.readS3Uri(fileResource.remotePath);
+      const { Body } = await this.s3.send(
+        new GetObjectCommand({ Bucket, Key }),
       );
-      const { Body } = await this.s3.getObject({ Bucket, Key });
       const body = Body as Readable;
       const tempFileName = path.join('/tmp', fileResource.name);
       const tempFile = fs.createWriteStream(tempFileName);

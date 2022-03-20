@@ -19,7 +19,8 @@
     "incremental": true
   },
   "include": [
-    "**/*.spec.ts"
+    "**/*.spec.ts",
+    "**/*.ts"
   ],
   "exclude": [
     "node_modules",

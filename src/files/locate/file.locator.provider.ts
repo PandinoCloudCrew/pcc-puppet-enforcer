@@ -1,3 +1,4 @@
+import { S3 } from '@aws-sdk/client-s3';
 import { Injectable } from '@nestjs/common';
 import { FileStorage } from '../model/file.storage.enum.js';
 import { FileLocatorBase } from './file.locator.abstract.js';
@@ -12,7 +13,7 @@ export class FileLocatorProvider {
       case FileStorage.LOCAL:
         return new FileLocatorLocalService();
       case FileStorage.S3:
-        return new FileLocatorS3Service();
+        return new FileLocatorS3Service(new S3({}));
       case FileStorage.FTP:
       default:
         return dummyLocator;

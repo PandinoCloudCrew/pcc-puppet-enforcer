@@ -58,6 +58,7 @@
     "@typescript-eslint/eslint-plugin": "5.15.0",
     "@typescript-eslint/parser": "5.15.0",
     "aws-lambda": "1.0.7",
+    "aws-sdk-client-mock": "^0.6.2",
     "cross-env": "^7.0.3",
     "eslint": "8.11.0",
     "eslint-config-prettier": "8.5.0",
@@ -100,7 +101,9 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node",
-    "extensionsToTreatAsEsm": [".ts"],
+    "extensionsToTreatAsEsm": [
+      ".ts"
+    ],
     "globals": {
       "ts-jest": {
         "useESM": true
