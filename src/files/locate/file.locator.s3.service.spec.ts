@@ -5,13 +5,17 @@ import { FileNotFoundS3Error } from '../../error/file.not.found.s3.error.js';
 import { FileLocatorS3Service } from './file.locator.s3.service.js';
 import { s3Client } from './s3/s3.client.js';
 import { mockClient } from 'aws-sdk-client-mock';
+import { PinoLogger } from 'nestjs-pino';
 
 const s3mock = mockClient(S3Client);
 describe('Fetch S3 CSV File', () => {
   let fileLocatorLocalService: FileLocatorS3Service;
   beforeEach(async () => {
     s3mock.reset();
-    fileLocatorLocalService = new FileLocatorS3Service(s3Client);
+    fileLocatorLocalService = new FileLocatorS3Service(
+      new PinoLogger({}),
+      s3Client,
+    );
   });
 
   describe('read file from S3', () => {

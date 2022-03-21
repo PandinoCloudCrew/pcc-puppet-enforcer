@@ -1,4 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { LoggerModule } from 'nestjs-pino';
 import { fileResource } from '../__mocks__/file.resource.mock.js';
 import { FileIteratorService } from './file.iterator.service.js';
 import { FileLocatorProvider } from './locate/file.locator.provider.js';
@@ -12,6 +13,7 @@ describe('File Iterator Service', () => {
   beforeEach(async () => {
     const app: TestingModule = await Test.createTestingModule({
       providers: [FileParseProvider, FileLocatorProvider, FileIteratorService],
+      imports: [LoggerModule.forRoot()],
     }).compile();
 
     fileIteratorService = app.get<FileIteratorService>(FileIteratorService);

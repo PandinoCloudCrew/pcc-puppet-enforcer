@@ -1,3 +1,4 @@
+import { PinoLogger } from 'nestjs-pino';
 import { fileResource } from '../../__mocks__/file.resource.mock.js';
 import { FileLocatorLocalService } from './file.locator.local.service.js';
 
@@ -5,7 +6,7 @@ describe('Fetch Local CSV File', () => {
   let fileLocatorLocalService: FileLocatorLocalService;
 
   beforeEach(async () => {
-    fileLocatorLocalService = new FileLocatorLocalService();
+    fileLocatorLocalService = new FileLocatorLocalService(new PinoLogger({}));
   });
 
   describe('read local file', () => {
