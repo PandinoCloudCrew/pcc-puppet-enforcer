@@ -22,10 +22,18 @@ describe('Fetch S3 CSV File', () => {
     const Bucket = 'pcc-dev-puppet-enforcer-storage';
     const Key = '/very/long/path/nested/test-users.csv';
     const s3Uri = `s3://${Bucket}${Key}`;
-    it('should parse S3 uri to get file properties', async () => {
+    it('should parse S3 uri with nested path to get file properties', async () => {
       const uriProperties = fileLocatorLocalService.readS3Uri(s3Uri);
       expect(uriProperties.Bucket).toEqual(Bucket);
       expect(uriProperties.Key).toEqual(Key);
+    });
+
+    it('should parse S3 uri over root path to get file properties', async () => {
+      const Key = '/test-users.csv';
+      const s3Uri = `s3://${Bucket}${Key}`;
+      const uriProperties = fileLocatorLocalService.readS3Uri(s3Uri);
+      expect(uriProperties.Bucket).toEqual(Bucket);
+      expect(uriProperties.Key).toEqual(Key.substring(1));
     });
 
     it('should throw FileNotFoundS3Error if file is not found', async () => {

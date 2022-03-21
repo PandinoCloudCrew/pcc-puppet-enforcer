@@ -25,6 +25,12 @@ export class FileLocatorS3Service extends FileLocatorBase {
     const uriComponents = remotePath.match(
       /^([a-z][a-z0-9+\-.]*:\/\/([^/?#]+)?)?([a-z0-9\-._~%!$&'()*+,;=:@/]*)/,
     );
+    if (
+      (uriComponents[3].match(/\//g) || []).length == 1 &&
+      uriComponents[3].startsWith('/')
+    ) {
+      return { Bucket: uriComponents[2], Key: uriComponents[3].substring(1) };
+    }
     return { Bucket: uriComponents[2], Key: uriComponents[3] };
   }
 
