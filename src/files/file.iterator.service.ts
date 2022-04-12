@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { randomUUID } from 'crypto';
+import { nanoid } from 'nanoid';
 import { InjectPinoLogger, PinoLogger } from 'nestjs-pino';
 import { FileFormatHash } from './format/file.format.hash.js';
 import { FileLocatorProvider } from './locate/file.locator.provider.js';
@@ -20,7 +20,7 @@ export class FileIteratorService {
 
   async processFile(fileResource: FileResource): Promise<FileJobResult> {
     const fileJob = new FileJobResult({
-      id: randomUUID(),
+      id: nanoid(),
       fileResource: fileResource,
       status: FileStatus.CREATED,
       description: FileJobDescription.PENDING,
