@@ -56,7 +56,7 @@ export class FileResource {
     if (!this.columnFormat) this.columnFormat = new Array<FileFormatMap>();
     else
       this.columnFormat = this.columnFormat.map(
-        (value) => new FileFormatMap(value),
+        (columnFormat) => new FileFormatMap(columnFormat),
       );
   }
 }

@@ -17,7 +17,7 @@ import { BaseErrorFilter } from './filters/base.exception.filter.js';
             genReqId: (request): ReqId => {
               return request.headers['X-Request-ID'] ?? nanoid();
             },
-            name: 'pcc-puppet-enforce',
+            name: 'pcc-puppet-enforcer',
             level: process.env.NODE_ENV !== 'production' ? 'debug' : 'info',
             transport: undefined,
           },

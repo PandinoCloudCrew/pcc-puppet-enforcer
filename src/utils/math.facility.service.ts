@@ -9,7 +9,7 @@ export class MathFacilityService {
     1: 1,
   };
 
-  fastFibonacci(n): number {
+  fastFibonacci(n: number): number {
     if (this.cache.hasOwnProperty(n)) {
       return this.cache[n];
     }
@@ -21,7 +21,7 @@ export class MathFacilityService {
     return fib;
   }
 
-  nearestFibonacci(n): number {
+  nearestFibonacci(n: number): number {
     if (n == 0) return 0;
     //Approximate by inverting the large term of Binet's formula
     const y = ~~((Math.log(n) + this.logroot5) / this.logphi);
