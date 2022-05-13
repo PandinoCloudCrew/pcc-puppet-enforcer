@@ -1,17 +1,13 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { FileStorage } from '../model/file.storage.enum.js';
 import { FileLocatorBase } from './file.locator.abstract.js';
 import { FileLocatorLocalService } from './file.locator.local.service.js';
 import { FileLocatorS3Service } from './file.locator.s3.service.js';
 import { s3Client } from './s3/s3.client.js';
-import { PinoLogger, InjectPinoLogger } from 'nestjs-pino';
 
 @Injectable()
 export class FileLocatorProvider {
-  constructor(
-    @InjectPinoLogger(FileLocatorProvider.name)
-    private readonly logger: PinoLogger,
-  ) {}
+  private readonly logger = new Logger(FileLocatorProvider.name);
 
   getLocator(type: FileStorage): FileLocatorBase {
     const dummyLocator: FileLocatorBase = null;

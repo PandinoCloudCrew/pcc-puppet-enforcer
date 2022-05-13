@@ -1,14 +1,11 @@
-import { PinoLogger, InjectPinoLogger } from 'nestjs-pino';
+import { Logger } from '@nestjs/common';
 import { FileFormatHash } from '../format/file.format.hash.js';
 import { FileResource } from '../model/file.resource.entity.js';
 import { FileRow } from '../model/file.row.entity.js';
 import { IFileParse } from './file.parse.interface.js';
 
 export class FileParseNoopService implements IFileParse {
-  constructor(
-    @InjectPinoLogger(FileParseNoopService.name)
-    private readonly logger: PinoLogger,
-  ) {}
+  private readonly logger = new Logger(FileParseNoopService.name);
 
   async *readContents(
     fileFormatHash: FileFormatHash,

@@ -40,3 +40,4 @@ test-report.xml
 !.vscode/extensions.json
 
 .yarn
+.yarnrc.yml

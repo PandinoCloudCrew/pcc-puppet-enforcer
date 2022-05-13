@@ -1,7 +1,7 @@
 import { GetObjectCommand, S3Client } from '@aws-sdk/client-s3';
+import { Logger } from '@nestjs/common';
 import { mockClient } from 'aws-sdk-client-mock';
 import fs from 'fs';
-import { PinoLogger } from 'nestjs-pino';
 import { fileResource } from '../../__mocks__/file.resource.mock.js';
 import { FileNotFoundS3Error } from '../../error/file.not.found.s3.error.js';
 import { FileResource } from '../model/file.resource.entity.js';
@@ -17,7 +17,7 @@ describe('Fetch S3 CSV File', () => {
     s3mock.reset();
     resource = JSON.parse(JSON.stringify(fileResource)) as FileResource;
     fileLocatorLocalService = new FileLocatorS3Service(
-      new PinoLogger({}),
+      new Logger(FileLocatorS3Service.name),
       s3Client,
     );
   });

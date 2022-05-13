@@ -1,6 +1,5 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { nanoid } from 'nanoid';
-import { InjectPinoLogger, PinoLogger } from 'nestjs-pino';
 import { MathFacilityService } from '../utils/math.facility.service.js';
 import { FileFormatHash } from './format/file.format.hash.js';
 import { FileLocatorProvider } from './locate/file.locator.provider.js';
@@ -12,9 +11,8 @@ import { FileParseProvider } from './parse/file.parse.provider.js';
 
 @Injectable()
 export class FileIteratorService {
+  private readonly logger = new Logger(FileIteratorService.name);
   constructor(
-    @InjectPinoLogger(FileIteratorService.name)
-    private readonly logger: PinoLogger,
     private fileLocatorProvider: FileLocatorProvider,
     private fileParseProvider: FileParseProvider,
     private mathFacility: MathFacilityService,
@@ -50,7 +48,7 @@ export class FileIteratorService {
     for await (const row of fileRows) {
       fileJob.rows.push(row);
       if (this.mathFacility.isFibonacci(rowCounter++))
-        this.logger.info(`Processed row ${rowCounter}: ${JSON.stringify(row)}`);
+        this.logger.log(`Processed row ${rowCounter}: ${JSON.stringify(row)}`);
     }
     fileJob.status = FileStatus.PROCESSED;
     fileJob.description = FileJobDescription.FINISHED;

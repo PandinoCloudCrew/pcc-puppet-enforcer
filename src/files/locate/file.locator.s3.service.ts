@@ -1,6 +1,6 @@
 import { GetObjectCommand, S3Client } from '@aws-sdk/client-s3';
+import { Logger } from '@nestjs/common';
 import fs from 'fs';
-import { PinoLogger } from 'nestjs-pino';
 import path from 'path';
 import { Readable } from 'stream';
 import { FileNotFoundS3Error } from '../../error/file.not.found.s3.error.js';
@@ -10,12 +10,11 @@ import { FileLocatorBase } from './file.locator.abstract.js';
 
 export class FileLocatorS3Service extends FileLocatorBase {
   s3: S3Client;
-  logger: PinoLogger;
-  constructor(logger: PinoLogger, s3: S3Client) {
+  logger: Logger;
+  constructor(logger: Logger, s3: S3Client) {
     super(logger);
     this.s3 = s3;
     this.logger = logger;
-    this.logger.setContext(FileLocatorS3Service.name);
   }
 
   readS3Uri(remotePath: string): {
