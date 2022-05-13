@@ -5,7 +5,9 @@ import { IFileStoreCsv } from './file.store.csv.interface.js';
 import { FileStoreMetadata } from './file.store.metadata.entity.js';
 
 export class S3FileStoreCsv implements IFileStoreCsv {
-  append(row: FileRow) {}
+  append(row: FileRow): unknown {
+    return row;
+  }
 
   flush(fileResource: FileResource): FileStoreMetadata {
     return new FileStoreMetadata({
@@ -14,5 +16,7 @@ export class S3FileStoreCsv implements IFileStoreCsv {
     });
   }
 
-  open(fileResource: FileResource) {}
+  open(fileResource: FileResource): unknown {
+    return fileResource;
+  }
 }
