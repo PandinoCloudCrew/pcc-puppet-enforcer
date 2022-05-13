@@ -1,5 +1,5 @@
-import { randomUUID } from 'crypto';
 import * as fs from 'fs';
+import { nanoid } from 'nanoid';
 import * as readline from 'readline';
 import { FileFormatHash } from '../format/file.format.hash.js';
 import { FileResource } from '../model/file.resource.entity.js';
@@ -21,7 +21,7 @@ export class FileParseCsvService implements IFileParse {
     for await (const line of rl) {
       fileResource.lines++;
       const fileRow = new FileRow();
-      fileRow.id = randomUUID();
+      fileRow.id = nanoid();
       fileRow.index = fileResource.lines;
       const columns = line.split(fileResource.columnSeparator);
       for (const [index, column] of columns.entries()) {

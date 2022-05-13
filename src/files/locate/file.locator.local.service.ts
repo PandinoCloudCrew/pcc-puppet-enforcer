@@ -1,16 +1,15 @@
+import { Logger } from '@nestjs/common';
 import { constants, promises as fs } from 'fs';
-import { PinoLogger } from 'nestjs-pino';
 import { LocalFileError } from '../../error/local.file.error.js';
 import { FileResource } from '../model/file.resource.entity.js';
 import { FileLocatorBase } from './file.locator.abstract.js';
 
 export class FileLocatorLocalService extends FileLocatorBase {
-  logger: PinoLogger;
+  logger: Logger;
 
-  constructor(logger: PinoLogger) {
+  constructor(logger: Logger) {
     super(logger);
     this.logger = logger;
-    this.logger.setContext(FileLocatorLocalService.name);
   }
 
   async downloadBytes(fileResource: FileResource): Promise<string> {

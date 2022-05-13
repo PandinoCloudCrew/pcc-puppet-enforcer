@@ -1,6 +1,6 @@
-import { Injectable } from '@nestjs/common';
-import { randomUUID } from 'crypto';
-import { InjectPinoLogger, PinoLogger } from 'nestjs-pino';
+import { Injectable, Logger } from '@nestjs/common';
+import { nanoid } from 'nanoid';
+import { MathFacilityService } from '../utils/math.facility.service.js';
 import { FileFormatHash } from './format/file.format.hash.js';
 import { FileLocatorProvider } from './locate/file.locator.provider.js';
 import { FileJobDescription } from './model/file.job.description.enum.js';
@@ -11,16 +11,16 @@ import { FileParseProvider } from './parse/file.parse.provider.js';
 
 @Injectable()
 export class FileIteratorService {
+  private readonly logger = new Logger(FileIteratorService.name);
   constructor(
-    @InjectPinoLogger(FileIteratorService.name)
-    private readonly logger: PinoLogger,
     private fileLocatorProvider: FileLocatorProvider,
     private fileParseProvider: FileParseProvider,
+    private mathFacility: MathFacilityService,
   ) {}
 
   async processFile(fileResource: FileResource): Promise<FileJobResult> {
     const fileJob = new FileJobResult({
-      id: randomUUID(),
+      id: nanoid(),
       fileResource: fileResource,
       status: FileStatus.CREATED,
       description: FileJobDescription.PENDING,
@@ -44,9 +44,11 @@ export class FileIteratorService {
     const columnFormatHash = new FileFormatHash(fileResource);
     const fileRows = formatParser.readContents(columnFormatHash, fileResource);
 
+    let rowCounter = 0;
     for await (const row of fileRows) {
       fileJob.rows.push(row);
-      this.logger.trace(`Processed row: ${JSON.stringify(row)}`);
+      if (this.mathFacility.isFibonacci(rowCounter++))
+        this.logger.log(`Processed row ${rowCounter}: ${JSON.stringify(row)}`);
     }
     fileJob.status = FileStatus.PROCESSED;
     fileJob.description = FileJobDescription.FINISHED;

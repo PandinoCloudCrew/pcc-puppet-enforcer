@@ -12,12 +12,16 @@ yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 
+# TypeScript incremental compilation cache
+*.tsbuildinfo
+
 # OS
 .DS_Store
 
 # Tests
 /coverage
 /.nyc_output
+eslint-report.json
 test-report.xml
 
 # IDEs and editors
@@ -37,3 +41,4 @@ test-report.xml
 !.vscode/extensions.json
 
 .yarn
+.yarnrc.yml

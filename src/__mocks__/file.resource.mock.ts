@@ -1,4 +1,4 @@
-import { randomUUID } from 'crypto';
+import { nanoid } from 'nanoid';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { FileFormatMap } from '../files/format/file.format.map.js';
@@ -12,7 +12,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export const fileResource = new FileResource({
-  id: randomUUID(),
+  id: nanoid(),
   status: FileStatus.CREATED,
   columnSeparator: ',',
   storageType: FileStorage.LOCAL,

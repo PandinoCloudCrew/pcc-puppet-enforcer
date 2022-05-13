@@ -1,15 +1,14 @@
+import { Logger } from '@nestjs/common';
 import { promises as fs } from 'fs';
-import { PinoLogger } from 'nestjs-pino';
 import path from 'path';
 import { FileResource } from '../model/file.resource.entity.js';
 import { FileType } from '../model/file.type.enum.js';
 import { IFileLocator } from './file.locator.interface.js';
 
 export abstract class FileLocatorBase implements IFileLocator {
-  logger: PinoLogger;
-  protected constructor(logger: PinoLogger) {
+  logger: Logger;
+  protected constructor(logger: Logger) {
     this.logger = logger;
-    this.logger.setContext(FileLocatorBase.name);
   }
 
   abstract downloadBytes(fileResource: FileResource): Promise<string>;
@@ -36,6 +35,8 @@ export abstract class FileLocatorBase implements IFileLocator {
   fileTypeFromExtension(fileExtension: string): FileType {
     switch (fileExtension) {
       case '.csv':
+        return FileType.CSV;
+      case '.xls':
         return FileType.CSV;
       default:
         return FileType.CHAR_DELIMITED;

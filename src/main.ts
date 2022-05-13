@@ -16,7 +16,7 @@ import awsLambdaFastify, {
 } from 'aws-lambda-fastify';
 import { fastify, FastifyInstance, FastifyServerOptions } from 'fastify';
 import compression from 'fastify-compress';
-import { Logger } from 'nestjs-pino';
+import { nanoid } from 'nanoid';
 import 'reflect-metadata';
 import { AppModule } from './app.module.js';
 import { BaseErrorFilter } from './filters/base.exception.filter.js';
@@ -30,14 +30,21 @@ let cachedNestApp: NestApp;
 let cachedProxy: PromiseHandler<unknown, LambdaResponse>;
 
 async function bootstrapServer(): Promise<NestApp> {
-  const serverOptions: FastifyServerOptions = { logger: true };
+  const serverOptions: FastifyServerOptions = {
+    logger: true,
+    // requestIdHeader: 'x-request-id',
+    genReqId: (request): string => {
+      // if (request.headers['x-request-id'] !== '')
+      //   return `${request.headers['x-request-id']}`;
+      return nanoid();
+    },
+  };
   const instance: FastifyInstance = fastify(serverOptions);
   const app = await NestFactory.create<NestFastifyApplication>(
     AppModule,
     new FastifyAdapter(instance),
     { bufferLogs: true },
   );
-  app.useLogger(app.get(Logger));
   app.setGlobalPrefix(process.env.API_PREFIX);
   app.useGlobalFilters(new BaseErrorFilter());
   await app.init();

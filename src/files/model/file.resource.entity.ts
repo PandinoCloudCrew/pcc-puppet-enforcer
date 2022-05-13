@@ -11,6 +11,7 @@ import { FileStorage } from './file.storage.enum.js';
 import { FileType } from './file.type.enum.js';
 
 export class FileResource {
+  public static DEFAULT_SEPARATOR = ',';
   @IsString()
   id: string;
 
@@ -45,7 +46,7 @@ export class FileResource {
 
   columnName: Record<string, number> = {};
 
-  columnSeparator: string;
+  columnSeparator: string = FileResource.DEFAULT_SEPARATOR;
 
   constructor(values: Partial<FileResource>) {
     if (values) {
@@ -55,7 +56,7 @@ export class FileResource {
     if (!this.columnFormat) this.columnFormat = new Array<FileFormatMap>();
     else
       this.columnFormat = this.columnFormat.map(
-        (value) => new FileFormatMap(value),
+        (columnFormat) => new FileFormatMap(columnFormat),
       );
   }
 }
