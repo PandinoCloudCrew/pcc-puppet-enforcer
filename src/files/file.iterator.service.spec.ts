@@ -1,5 +1,4 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { LoggerModule } from 'nestjs-pino';
 import { fileResource } from '../__mocks__/file.resource.mock.js';
 import { UtilsModule } from '../utils/utils.module.js';
 import { FileIteratorService } from './file.iterator.service.js';
@@ -17,18 +16,7 @@ describe('File Iterator Service', () => {
     resource = new FileResource(JSON.parse(JSON.stringify(fileResource)));
     const app: TestingModule = await Test.createTestingModule({
       providers: [FileParseProvider, FileLocatorProvider, FileIteratorService],
-      imports: [
-        UtilsModule,
-        LoggerModule.forRootAsync({
-          useFactory: async () => {
-            return {
-              pinoHttp: {
-                name: 'pcc-puppet-enforcer-FileIteratorService',
-              },
-            };
-          },
-        }),
-      ],
+      imports: [UtilsModule],
     }).compile();
 
     fileIteratorService = app.get<FileIteratorService>(FileIteratorService);

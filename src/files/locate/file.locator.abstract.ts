@@ -36,6 +36,8 @@ export abstract class FileLocatorBase implements IFileLocator {
     switch (fileExtension) {
       case '.csv':
         return FileType.CSV;
+      case '.xls':
+        return FileType.CSV;
       default:
         return FileType.CHAR_DELIMITED;
     }
