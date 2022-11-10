@@ -2540,10 +2540,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/aws-lambda@npm:8.10.97":
-  version: 8.10.97
-  resolution: "@types/aws-lambda@npm:8.10.97"
-  checksum: 0a79e5d8533fa317e6855a3319abdb62645d826370a274444ada0fc2cac64e82f39cb4f6416bd075e2031df91809e57e7ad430f9aeea28bbe2f3be8d4c03ea6d
+"@types/aws-lambda@npm:8.10.108":
+  version: 8.10.108
+  resolution: "@types/aws-lambda@npm:8.10.108"
+  checksum: 648a6cc8e627e6170fbfa523c918cea6b06cdb0a66e25aa35da99a78ed1b7345e4f2921e25f96cb2547f0a13bbd77a90823c37c650db6e9ad8e3b03752e21570
   languageName: node
   linkType: hard
 
@@ -10135,7 +10135,7 @@ __metadata:
     "@nestjs/platform-fastify": 8.4.5
     "@nestjs/schematics": 8.0.11
     "@nestjs/testing": 8.4.5
-    "@types/aws-lambda": 8.10.97
+    "@types/aws-lambda": 8.10.108
     "@types/express": 4.17.13
     "@types/jest": 27.5.1
     "@types/node": 17.0.33
