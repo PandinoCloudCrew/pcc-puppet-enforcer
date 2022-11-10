@@ -3600,10 +3600,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"aws-lambda-fastify@npm:2.1.2":
-  version: 2.1.2
-  resolution: "aws-lambda-fastify@npm:2.1.2"
-  checksum: 9d2ebc46592c861354a906e7cc8e618ecb34240ff372428eed63dee87a9150493442f277ad767b85d46ea9d5060e1dcb496f33e9300627dbef1d9c27f893c0d0
+"aws-lambda-fastify-deprecated@npm:aws-lambda-fastify@2.1.6":
+  version: 2.1.6
+  resolution: "aws-lambda-fastify@npm:2.1.6"
+  checksum: 8ccc46c155788add96bcb0d49206b10119c3d56a9595a798ece74e26b5be8e8eb0e83e23f6d60037c76fa0137686e9a1c39fb15c7d200cc23af9803308ab23bf
+  languageName: node
+  linkType: hard
+
+"aws-lambda-fastify@npm:2.2.0":
+  version: 2.2.0
+  resolution: "aws-lambda-fastify@npm:2.2.0"
+  dependencies:
+    aws-lambda-fastify-deprecated: "npm:aws-lambda-fastify@2.1.6"
+    process-warning: ^1.0.0
+  checksum: 0f08cab455dae02faa0e4e1da1ea0f4207c93ea7a3b52fefca752213e4996e4c668888bb55b17d16655c706225198c3c42b268a09a90bd63445da30fbb4de91b
   languageName: node
   linkType: hard
 
@@ -10143,7 +10153,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": 5.23.0
     "@typescript-eslint/parser": 5.23.0
     aws-lambda: 1.0.7
-    aws-lambda-fastify: 2.1.2
+    aws-lambda-fastify: 2.2.0
     aws-sdk-client-mock: 0.6.2
     class-transformer: 0.5.1
     class-validator: 0.13.2
