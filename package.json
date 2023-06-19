@@ -71,7 +71,7 @@
     "gitmoji-changelog": "2.3.0",
     "jest": "28.1.0",
     "jest-sonar-reporter": "2.0.0",
-    "npm-check-updates": "12.5.11",
+    "npm-check-updates": "12.5.12",
     "plugin": "0.3.3",
     "prettier": "2.6.2",
     "source-map-support": "0.5.21",
