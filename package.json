@@ -64,7 +64,7 @@
     "aws-lambda": "1.0.7",
     "aws-sdk-client-mock": "0.6.2",
     "cross-env": "7.0.3",
-    "eslint": "8.15.0",
+    "eslint": "8.57.0",
     "eslint-config-prettier": "8.5.0",
     "eslint-plugin-prettier": "4.0.0",
     "eslint-plugin-sonarjs": "^0.13.0",
